@@ -13,3 +13,39 @@ Explanation:
 62 + 82 = 100
 12 + 02 + 02 = 1
 ```
+
+### Implementation
+
+```java
+import java.util.HashSet;
+import java.util.Set;
+
+public class App {
+	public static void main(String[] args) {
+		System.out.println(isHappyNumber(1));
+	}
+
+	private static boolean isHappyNumber(int number) {
+		Set<Integer> set = new HashSet<Integer>();
+		while (!set.contains(number)) {
+			set.add(number);
+			number = getSum(number);
+			if (number == 1) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	private static int getSum(int n) {
+		int sum = 0;
+		while (n > 0) {
+			sum += (n % 10) * (n % 10);
+			n = n / 10;
+		}
+		return sum;
+	}
+}
+
+```
