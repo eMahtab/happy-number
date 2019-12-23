@@ -22,20 +22,22 @@ import java.util.Set;
 
 public class App {
 	public static void main(String[] args) {
-		System.out.println(isHappyNumber(1));
+		System.out.println(isHappyNumber(19));
 	}
 
 	private static boolean isHappyNumber(int number) {
 		Set<Integer> set = new HashSet<Integer>();
-		while (!set.contains(number)) {
-			set.add(number);
-			number = getSum(number);
-			if (number == 1) {
-				return true;
+		int sum = 0;
+		while(sum != 1) {
+			sum = getSum(number);
+			number = sum;
+			if(set.contains(number)) {
+				return false;
 			}
+			set.add(number);
 		}
 
-		return false;
+		return true;
 	}
 
 	private static int getSum(int n) {
