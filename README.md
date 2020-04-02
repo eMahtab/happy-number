@@ -17,37 +17,34 @@ Explanation:
 ### Implementation
 
 ```java
-import java.util.HashSet;
-import java.util.Set;
-
-public class App {
-	public static void main(String[] args) {
-		System.out.println(isHappyNumber(19));
-	}
-
-	private static boolean isHappyNumber(int number) {
-		Set<Integer> set = new HashSet<Integer>();
-		int sum = 0;
-		while(sum != 1) {
-			sum = getSum(number);
-			number = sum;
-			if(set.contains(number)) {
-				return false;
-			}
-			set.add(number);
-		}
-
-		return true;
-	}
-
-	private static int getSum(int n) {
-		int sum = 0;
-		while (n > 0) {
-			sum += (n % 10) * (n % 10);
-			n = n / 10;
-		}
-		return sum;
-	}
+class Solution {
+    public boolean isHappy(int n) {
+        Set<Integer> set = new HashSet<Integer>();
+        boolean isHappy = false;
+        while(!isHappy) {
+            int sum = sumOfSquares(n);
+            if(sum == 1){
+                isHappy = true;
+                break;
+            }
+            if(set.contains(n)) 
+                break;
+            set.add(n);
+            n = sum;
+        }
+        return isHappy;
+    }
+    
+    private int sumOfSquares(int n) {
+        int sum = 0;
+        while(n > 0) {
+            int digit = n % 10;
+            int square = digit * digit;
+            sum += square;
+            n = n / 10;
+        }
+        return sum;
+    }
 }
 
 ```
